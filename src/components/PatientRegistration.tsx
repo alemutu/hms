@@ -237,12 +237,15 @@ export const PatientRegistration = () => {
         };
 
         await addPatient(newPatient);
-      } else if (selectedPatient) {
+      } else {
+        // Check if a patient is selected for update
+        if (!selectedPatient) {
+          throw new Error('Please select a patient to update');
+        }
+        
         // Update existing patient (in a real app, this would call an update API)
         console.log('Updating existing patient:', selectedPatient.id);
         // This is a placeholder for updating patient info
-      } else {
-        throw new Error('No patient selected for update');
       }
 
       setSuccess(true);
@@ -640,7 +643,7 @@ export const PatientRegistration = () => {
               <div 
                 className={`border rounded-lg p-4 cursor-pointer transition-all ${
                   formData.priority === 'urgent'
-                    ? 'border-amber-500 bg-amber-50 ring-1 ring-amber-500/20'
+                    ? 'border-amber-500 bg-amber-50  ring-1 ring-amber-500/20'
                     : 'hover:bg-gray-50'
                 }`}
                 onClick={() => setFormData({ ...formData, priority: 'urgent' })}
