@@ -86,8 +86,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [showPatientJourney, setShowPatientJourney] = React.useState(false);
   const [showAuthModal, setShowAuthModal] = React.useState(false);
   const [showUserProfile, setShowUserProfile] = React.useState(false);
-  const [showContinueWorkflow, setShowContinueWorkflow] = React.useState(false);
   const [showUserSwitcher, setShowUserSwitcher] = React.useState(false);
+  const [showContinueWorkflow, setShowContinueWorkflow] = React.useState(false);
 
   // Check for patients with paused workflows
   const pausedWorkflows = React.useMemo(() => {
