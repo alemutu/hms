@@ -113,12 +113,19 @@ function App() {
         <Route path="/update-password" element={<UpdatePasswordPage />} />
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
         <Route path="/" element={
-          <ProtectedRoute>
+          process.env.NODE_ENV === 'development' ? (
             <Layout>
               {renderContent()}
               <PreviewPanel />
             </Layout>
-          </ProtectedRoute>
+          ) : (
+            <ProtectedRoute>
+              <Layout>
+                {renderContent()}
+                <PreviewPanel />
+              </Layout>
+            </ProtectedRoute>
+          )
         } />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
