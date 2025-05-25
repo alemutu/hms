@@ -1,0 +1,7 @@
+# Allow all web crawlers
+User-agent: *
+Allow: /
+
+# Disallow sensitive routes
+Disallow: /admin
+Disallow: /settings
