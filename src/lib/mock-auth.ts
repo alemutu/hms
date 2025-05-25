@@ -12,6 +12,15 @@ const mockUsers: User[] = [
     admin_role: 'super_admin'
   },
   {
+    id: 'admin-1',
+    name: 'Hospital Admin',
+    email: 'hospital-admin@example.com',
+    role: 'admin',
+    status: 'active',
+    permissions: rolePermissions.admin,
+    hospital_id: 'hospital-1'
+  },
+  {
     id: 'reception-1',
     name: 'Jane Smith',
     email: 'reception@example.com',
@@ -33,7 +42,7 @@ const mockUsers: User[] = [
 ];
 
 // Store the current user in memory
-let currentUser: User = mockUsers[0]; // Default to admin user
+let currentUser: User = mockUsers[1]; // Default to hospital admin user
 
 export const mockAuth = {
   getCurrentUser: async (): Promise<User> => {
@@ -53,7 +62,7 @@ export const mockAuth = {
   },
   
   logout: async (): Promise<void> => {
-    currentUser = mockUsers[0]; // Reset to admin
+    currentUser = mockUsers[1]; // Reset to hospital admin
   },
   
   signUp: async (email: string, password: string, userData: any): Promise<{ success: boolean; error?: string }> => {

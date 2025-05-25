@@ -32,7 +32,7 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(defaultUsers[0]); // Start with default admin user
+  const [user, setUser] = useState<User | null>(defaultUsers[1]); // Start with hospital admin user
   const [loading, setLoading] = useState(false);
 
   // Load user on mount
@@ -43,7 +43,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(currentUser);
       } catch (error) {
         console.error('Error loading user:', error);
-        setUser(defaultUsers[0]); // Fallback to default user
+        setUser(defaultUsers[1]); // Fallback to hospital admin user
       } finally {
         setLoading(false);
       }
@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = async (): Promise<void> => {
     try {
       await auth.logout();
-      setUser(defaultUsers[0]); // Reset to default user
+      setUser(defaultUsers[1]); // Reset to hospital admin
     } catch (error) {
       console.error('Logout error:', error);
     }

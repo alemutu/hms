@@ -8,6 +8,7 @@ import { PatientJourneyTracker } from './PatientJourneyTracker';
 import { useAuthContext } from './auth/AuthProvider';
 import { AuthModal } from './auth/AuthModal';
 import { UserProfile } from './auth/UserProfile';
+import { UserSwitcher } from './UserSwitcher';
 import { 
   Menu, 
   User, 
@@ -86,6 +87,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [showAuthModal, setShowAuthModal] = React.useState(false);
   const [showUserProfile, setShowUserProfile] = React.useState(false);
   const [showContinueWorkflow, setShowContinueWorkflow] = React.useState(false);
+  const [showUserSwitcher, setShowUserSwitcher] = React.useState(false);
 
   // Check for patients with paused workflows
   const pausedWorkflows = React.useMemo(() => {
@@ -314,7 +316,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           {isAuthenticated ? (
             <div 
               className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-              onClick={() => setShowUserProfile(!showUserProfile)}
+              onClick={() => setShowUserSwitcher(!showUserSwitcher)}
             >
               <img
                 src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=50&h=50&fit=crop"
@@ -393,6 +395,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <footer className="bg-white border-t py-4 px-8 text-center text-sm text-gray-500 w-full">
           All rights reserved © Gosearch Link
         </footer>
+        
+        {/* Dev Mode User Switcher */}
+        {process.env.NODE_ENV === 'development' && showUserSwitcher && (
+          <div className="fixed top-20 right-8 z-40 w-80 shadow-xl">
+            <UserSwitcher />
+          </div>
+        )}
         
         {/* Patient Journey Tracker Popup */}
         {showPatientJourney && currentPatient && (
