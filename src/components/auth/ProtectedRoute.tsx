@@ -32,4 +32,4 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   // In development mode, always render children
   return <>{children}</>;
-};
+}

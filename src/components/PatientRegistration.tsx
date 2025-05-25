@@ -206,6 +206,7 @@ export const PatientRegistration = () => {
       if (isNewPatient) {
         // Create new patient
         const newPatient = {
+          id: crypto.randomUUID(), // Generate a UUID for the patient
           idNumber: formData.isEmergency ? (formData.idNumber || 'EMERGENCY') : formData.idNumber,
           fullName: formData.fullName,
           age: parseInt(formData.age) || 0, // Default to 0 for emergency if not provided
@@ -233,7 +234,8 @@ export const PatientRegistration = () => {
           emergencyDescription: formData.isEmergency ? formData.emergencyDescription : undefined,
           emergencyBroughtBy: formData.isEmergency ? formData.emergencyBroughtBy : undefined,
           emergencyContactName: formData.isEmergency ? formData.emergencyContactName : undefined,
-          emergencyContactPhone: formData.isEmergency ? formData.emergencyContactPhone : undefined
+          emergencyContactPhone: formData.isEmergency ? formData.emergencyContactPhone : undefined,
+          registrationDate: new Date()
         };
 
         await addPatient(newPatient);
@@ -643,7 +645,7 @@ export const PatientRegistration = () => {
               <div 
                 className={`border rounded-lg p-4 cursor-pointer transition-all ${
                   formData.priority === 'urgent'
-                    ? 'border-amber-500 bg-amber-50  ring-1 ring-amber-500/20'
+                    ? 'border-amber-500 bg-amber-50 ring-1 ring-amber-500/20'
                     : 'hover:bg-gray-50'
                 }`}
                 onClick={() => setFormData({ ...formData, priority: 'urgent' })}
